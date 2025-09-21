@@ -234,16 +234,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // 发送到API
-    function sendToAPI(windowIndex, model, temperature) {
+    function sendToAPI(windowIndex, model, temperature, retryCount = 0) {
         const apiKey = apiKeys[windowIndex];
         if (!apiKey) {
             addErrorMessage("请在设置中添加API密钥", windowIndex);
             return;
         }
         
-        // 显示加载指示器
-        const loadingMessage = { role: 'assistant', content: '思考中...' };
-        const loadingElement = addMessageToUI(loadingMessage, windowIndex);
+        // 显示加载指示器（仅在首次尝试时显示）
+        let loadingElement;
+        if (retryCount === 0) {
+            const loadingMessage = { role: 'assistant', content: '思考中...' };
+            loadingElement = addMessageToUI(loadingMessage, windowIndex);
+        } else {
+            // 获取现有的加载指示器
+            loadingElement = document.querySelectorAll('.messages-container')[windowIndex].querySelector('.message.assistant:last-child');
+        }
         
         // 准备发送到API的消息历史
         const messageHistory = conversations[windowIndex][activeConversationIndex[windowIndex]].map(msg => ({
@@ -292,15 +298,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 conversations[windowIndex][activeConversationIndex[windowIndex]].push(assistantMessage);
             })
             .catch(error => {
-                console.error('Error:', error);
+                // 窗口3使用10次重试，其他窗口使用5次重试
+                const maxRetries = windowIndex === 2 ? 10 : 5;
+                const maxRetryAttempts = windowIndex === 2 ? 9 : 4;
                 
-                // 移除加载消息
-                if (loadingElement && loadingElement.parentNode) {
-                    loadingElement.parentNode.removeChild(loadingElement);
+                console.error(`Error (attempt ${retryCount + 1}/${maxRetries}):`, error);
+                
+                // 检查是否需要重试
+                if (retryCount < maxRetryAttempts) { // 窗口3最多重试9次，总共10次尝试
+                    console.log(`重试第 ${retryCount + 2} 次...`);
+                    
+                    // 更新加载消息内容，显示重试信息
+                    if (loadingElement) {
+                        loadingElement.querySelector('.message-content').textContent = `思考中... (重试 ${retryCount + 2}/${maxRetries})`;
+                    }
+                    
+                    // 延迟一段时间后重试，每次重试增加延迟
+                    setTimeout(() => {
+                        sendToAPI(windowIndex, model, temperature, retryCount + 1);
+                    }, 1000 * (retryCount + 1)); // 递增延迟：1秒、2秒、3秒...
+                } else {
+                    // 所有重试都失败，移除加载消息并显示错误
+                    if (loadingElement && loadingElement.parentNode) {
+                        loadingElement.parentNode.removeChild(loadingElement);
+                    }
+                    
+                    // 显示错误消息
+                    addErrorMessage(`API请求失败: ${error.message}`, windowIndex);
                 }
-                
-                // 显示错误消息
-                addErrorMessage(`API请求失败: ${error.message}`, windowIndex);
             });
     }
     
