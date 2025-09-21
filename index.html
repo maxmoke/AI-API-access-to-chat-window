@@ -55,6 +55,7 @@
                             <option value="google/gemini-2.0-flash-exp:free" selected>gemini-2.0-flash-exp:free</option>
                             <option value="deepseek/deepseek-chat-v3.1:free">deepseek-chat-v3.1:free</option>
                             <option value="x-ai/grok-4-fast:free">grok-4-fast:free</option>
+                            <option value="qwen/qwen3-coder:free">qwen3-coder:free</option>
                             <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
                             <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
                             <option value="meta-llama/llama-3-70b-instruct">Llama 3 70B</option>
@@ -73,6 +74,15 @@
                 
                 <div class="input-area">
                     <textarea class="input-field" placeholder="输入消息..."></textarea>
+                    <div class="input-buttons">
+                        <label for="image-upload-1" class="upload-btn">
+                            <i class="fas fa-paperclip"></i>
+                        </label>
+                        <input type="file" id="image-upload-1" class="image-upload" accept="*/*" style="display:none">
+                        <button class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -103,6 +113,7 @@
                             <option value="google/gemini-2.0-flash-exp:free" selected>gemini-2.0-flash-exp:free</option>
                             <option value="deepseek/deepseek-chat-v3.1:free">deepseek-chat-v3.1:free</option>
                             <option value="x-ai/grok-4-fast:free">grok-4-fast:free</option>
+                            <option value="qwen/qwen3-coder:free">qwen3-coder:free</option>
                             <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
                             <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
                             <option value="meta-llama/llama-3-70b-instruct">Llama 3 70B</option>
@@ -121,6 +132,15 @@
                 
                 <div class="input-area">
                     <textarea class="input-field" placeholder="输入消息..."></textarea>
+                    <div class="input-buttons">
+                        <label for="image-upload-2" class="upload-btn">
+                            <i class="fas fa-paperclip"></i>
+                        </label>
+                        <input type="file" id="image-upload-2" class="image-upload" accept="*/*" style="display:none">
+                        <button class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -151,6 +171,7 @@
                             <option value="google/gemini-2.0-flash-exp:free" selected>gemini-2.0-flash-exp:free</option>
                             <option value="deepseek/deepseek-chat-v3.1:free">deepseek-chat-v3.1:free</option>
                             <option value="x-ai/grok-4-fast:free">grok-4-fast:free</option>
+                            <option value="qwen/qwen3-coder:free">qwen3-coder:free</option>
                             <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
                             <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
                             <option value="meta-llama/llama-3-70b-instruct">Llama 3 70B</option>
@@ -169,6 +190,15 @@
                 
                 <div class="input-area">
                     <textarea class="input-field" placeholder="输入消息..."></textarea>
+                    <div class="input-buttons">
+                        <label for="image-upload-3" class="upload-btn">
+                            <i class="fas fa-paperclip"></i>
+                        </label>
+                        <input type="file" id="image-upload-3" class="image-upload" accept="*/*" style="display:none">
+                        <button class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,6 +207,15 @@
         <div class="bottom-master-input-area">
             <div class="master-input-container">
                 <textarea id="master-input" class="master-input" placeholder="在此输入消息发送到所有窗口..."></textarea>
+                <div class="input-buttons">
+                    <label for="master-upload" class="upload-btn">
+                        <i class="fas fa-paperclip"></i>
+                    </label>
+                    <input type="file" id="master-upload" accept="*/*" style="display: none;">
+                    <button id="master-send-btn" class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
             </div>
         </div>
         
