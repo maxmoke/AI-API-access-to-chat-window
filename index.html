@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI聊天助手</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <div class="top-navbar">
+            <h1>AI聊天助手</h1>
+            <div class="navbar-actions">
+                <button class="settings-btn">
+                    <i class="fas fa-cog"></i> 设置
+                </button>
+                <div class="theme-toggle">
+                    <span><i class="fas fa-moon"></i></span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 聊天窗口区域 - 竖直并列 -->
+        <div class="chat-windows-vertical">
+            <!-- 窗口1 -->
+            <div id="window-1" class="chat-window">
+                <div class="chat-window-header">
+                    <h2>窗口 1</h2>
+                    <div class="window-actions">
+                        <button class="new-chat-btn">
+                            <i class="fas fa-plus"></i> 新对话
+                        </button>
+                        <button class="delete-chat-btn">
+                            <i class="fas fa-trash"></i> 删除对话
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="conversations-list"></div>
+                
+                <div class="chat-header">
+                    <div class="model-selector">
+                        <label>模型:</label>
+                        <select>
+                            <option value="anthropic/claude-3-opus-20240229">Claude 3 Opus</option>
+                            <option value="anthropic/claude-3-sonnet-20240229">Claude 3 Sonnet</option>
+                            <option value="anthropic/claude-3-haiku-20240307">Claude 3 Haiku</option>
+                            <option value="deepseek/deepseek-chat-v3-0324:free">deepseek-chat-v3-0324:free</option>
+                            <option value="google/gemini-2.0-flash-exp:free" selected>gemini-2.0-flash-exp:free</option>
+                            <option value="deepseek/deepseek-chat-v3.1:free">deepseek-chat-v3.1:free</option>
+                            <option value="x-ai/grok-4-fast:free">grok-4-fast:free</option>
+                            <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
+                            <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="meta-llama/llama-3-70b-instruct">Llama 3 70B</option>
+                        </select>
+                    </div>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <label>温度:</label>
+                            <input type="range" min="0" max="1" step="0.1" value="0.7">
+                            <span class="value">0.7</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="messages-container"></div>
+                
+                <div class="input-area">
+                    <textarea class="input-field" placeholder="输入消息..."></textarea>
+                </div>
+            </div>
+            
+            <!-- 窗口2 -->
+            <div id="window-2" class="chat-window">
+                <div class="chat-window-header">
+                    <h2>窗口 2</h2>
+                    <div class="window-actions">
+                        <button class="new-chat-btn">
+                            <i class="fas fa-plus"></i> 新对话
+                        </button>
+                        <button class="delete-chat-btn">
+                            <i class="fas fa-trash"></i> 删除对话
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="conversations-list"></div>
+                
+                <div class="chat-header">
+                    <div class="model-selector">
+                        <label>模型:</label>
+                        <select>
+                            <option value="anthropic/claude-3-opus-20240229">Claude 3 Opus</option>
+                            <option value="anthropic/claude-3-sonnet-20240229">Claude 3 Sonnet</option>
+                            <option value="anthropic/claude-3-haiku-20240307">Claude 3 Haiku</option>
+                            <option value="deepseek/deepseek-chat-v3-0324:free">deepseek-chat-v3-0324:free</option>
+                            <option value="google/gemini-2.0-flash-exp:free" selected>gemini-2.0-flash-exp:free</option>
+                            <option value="deepseek/deepseek-chat-v3.1:free">deepseek-chat-v3.1:free</option>
+                            <option value="x-ai/grok-4-fast:free">grok-4-fast:free</option>
+                            <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
+                            <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="meta-llama/llama-3-70b-instruct">Llama 3 70B</option>
+                        </select>
+                    </div>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <label>温度:</label>
+                            <input type="range" min="0" max="1" step="0.1" value="0.7">
+                            <span class="value">0.7</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="messages-container"></div>
+                
+                <div class="input-area">
+                    <textarea class="input-field" placeholder="输入消息..."></textarea>
+                </div>
+            </div>
+            
+            <!-- 窗口3 -->
+            <div id="window-3" class="chat-window">
+                <div class="chat-window-header">
+                    <h2>窗口 3</h2>
+                    <div class="window-actions">
+                        <button class="new-chat-btn">
+                            <i class="fas fa-plus"></i> 新对话
+                        </button>
+                        <button class="delete-chat-btn">
+                            <i class="fas fa-trash"></i> 删除对话
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="conversations-list"></div>
+                
+                <div class="chat-header">
+                    <div class="model-selector">
+                        <label>模型:</label>
+                        <select>
+                            <option value="anthropic/claude-3-opus-20240229">Claude 3 Opus</option>
+                            <option value="anthropic/claude-3-sonnet-20240229">Claude 3 Sonnet</option>
+                            <option value="anthropic/claude-3-haiku-20240307">Claude 3 Haiku</option>
+                            <option value="deepseek/deepseek-chat-v3-0324:free">deepseek-chat-v3-0324:free</option>
+                            <option value="google/gemini-2.0-flash-exp:free" selected>gemini-2.0-flash-exp:free</option>
+                            <option value="deepseek/deepseek-chat-v3.1:free">deepseek-chat-v3.1:free</option>
+                            <option value="x-ai/grok-4-fast:free">grok-4-fast:free</option>
+                            <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
+                            <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="meta-llama/llama-3-70b-instruct">Llama 3 70B</option>
+                        </select>
+                    </div>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <label>温度:</label>
+                            <input type="range" min="0" max="1" step="0.1" value="0.7">
+                            <span class="value">0.7</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="messages-container"></div>
+                
+                <div class="input-area">
+                    <textarea class="input-field" placeholder="输入消息..."></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部总输入区域 -->
+        <div class="bottom-master-input-area">
+            <div class="master-input-container">
+                <textarea id="master-input" class="master-input" placeholder="在此输入消息发送到所有窗口..."></textarea>
+            </div>
+        </div>
+        
+        <!-- 设置模态框 -->
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>设置</h2>
+                <div class="form-group">
+                    <label for="api-key-1">窗口1 OpenRouter API密钥:</label>
+                    <input type="password" id="api-key-1" placeholder="输入您的API密钥">
+                </div>
+                <div class="form-group">
+                    <label for="api-key-2">窗口2 OpenRouter API密钥:</label>
+                    <input type="password" id="api-key-2" placeholder="输入您的API密钥">
+                </div>
+                <div class="form-group">
+                    <label for="api-key-3">窗口3 OpenRouter API密钥:</label>
+                    <input type="password" id="api-key-3" placeholder="输入您的API密钥">
+                </div>
+                <button id="save-settings" class="primary-btn">保存</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
